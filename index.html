@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ONE STATE TR - Ceza Rehberi</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#080a12;
+color:#fff;
+min-height:100vh;
+}
+
+header{
+padding:45px 20px 35px;
+text-align:center;
+background:
+radial-gradient(circle at 50% 0%,#3738a8 0%,transparent 45%),
+linear-gradient(180deg,#11142b,#080a12);
+border-bottom:1px solid #20243a;
+}
+
+.logo{
+width:80px;
+height:80px;
+margin:auto;
+border-radius:25px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+font-weight:900;
+background:linear-gradient(135deg,#5865f2,#8b5cf6);
+box-shadow:0 0 35px #5865f255;
+}
+
+h1{
+margin-top:20px;
+font-size:32px;
+letter-spacing:3px;
+}
+
+h1 span{color:#6574ff}
+
+.subtitle{
+margin-top:10px;
+color:#8d93aa;
+font-size:14px;
+}
+
+.container{
+max-width:1250px;
+margin:auto;
+padding:25px 16px 60px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px;
+margin-bottom:20px;
+}
+
+.stat{
+background:linear-gradient(145deg,#111522,#0d1019);
+border:1px solid #24283b;
+border-radius:20px;
+padding:20px;
+}
+
+.stat-title{
+color:#858ca3;
+font-size:13px;
+}
+
+.stat-value{
+font-size:28px;
+font-weight:800;
+margin-top:8px;
+}
+
+.search{
+width:100%;
+padding:17px 20px;
+border-radius:16px;
+border:1px solid #292e44;
+background:#111520;
+color:white;
+font-size:15px;
+outline:none;
+margin-bottom:16px;
+}
+
+.search:focus{
+border-color:#6574ff;
+box-shadow:0 0 0 3px #6574ff18;
+}
+
+.filters{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-bottom:22px;
+}
+
+button{
+border:1px solid #292e44;
+background:#111520;
+color:#aab0c4;
+padding:11px 16px;
+border-radius:12px;
+cursor:pointer;
+font-weight:700;
+}
+
+button:hover,
+button.active{
+background:#5865f2;
+color:#fff;
+border-color:#5865f2;
+}
+
+.section{
+margin-top:30px;
+}
+
+.section-title{
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:14px;
+font-size:21px;
+}
+
+.badge{
+font-size:11px;
+padding:5px 9px;
+border-radius:8px;
+background:#1d2240;
+color:#8490ff;
+}
+
+.rules{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
+
+.rule{
+background:linear-gradient(145deg,#10131d,#0c0f17);
+border:1px solid #24283a;
+border-radius:17px;
+padding:17px;
+transition:.2s;
+}
+
+.rule:hover{
+transform:translateY(-2px);
+border-color:#5865f255;
+}
+
+.rule-top{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+margin-bottom:12px;
+}
+
+.code{
+font-weight:900;
+font-size:17px;
+color:#8b95ff;
+}
+
+.type{
+font-size:11px;
+font-weight:800;
+padding:6px 9px;
+border-radius:8px;
+background:#1c2030;
+color:#aab0c4;
+}
+
+.name{
+font-size:16px;
+font-weight:800;
+margin-bottom:5px;
+}
+
+.tr{
+font-size:14px;
+color:#9da4b8;
+margin-bottom:13px;
+}
+
+.info{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+}
+
+.info-box{
+background:#0a0d14;
+border:1px solid #1e2332;
+border-radius:10px;
+padding:10px;
+}
+
+.label{
+font-size:10px;
+color:#70778c;
+text-transform:uppercase;
+margin-bottom:4px;
+}
+
+.value{
+font-size:13px;
+font-weight:700;
+}
+
+.explanation{
+margin-top:10px;
+padding:10px;
+border-radius:10px;
+background:#111625;
+color:#8f97aa;
+font-size:12px;
+line-height:1.5;
+}
+
+.no-result{
+text-align:center;
+padding:45px 15px;
+color:#747b91;
+display:none;
+}
+
+footer{
+text-align:center;
+padding:30px;
+border-top:1px solid #20243a;
+color:#62697d;
+font-size:12px;
+}
+
+@media(max-width:800px){
+.stats{grid-template-columns:repeat(2,1fr)}
+.rules{grid-template-columns:1fr}
+h1{font-size:27px}
+}
+
+@media(max-width:450px){
+.container{padding:18px 11px 45px}
+.stat{padding:15px}
+.stat-value{font-size:23px}
+.info{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">OS</div>
+<h1>ONE<span>STATE</span> TR</h1>
+<div class="subtitle">Yetkili Ceza Rehberi · Güncel Kural Sistemi</div>
+</header>
+
+<div class="container">
+
+<div class="stats">
+<div class="stat">
+<div class="stat-title">Toplam Kural</div>
+<div class="stat-value" id="total">0</div>
+</div>
+
+<div class="stat">
+<div class="stat-title">Admin Seviyesi</div>
+<div class="stat-value">3</div>
+</div>
+
+<div class="stat">
+<div class="stat-title">Jail / Mute</div>
+<div class="stat-value">∞</div>
+</div>
+
+<div class="stat">
+<div class="stat-title">Perma Süresi</div>
+<div class="stat-value">999999</div>
+</div>
+</div>
+
+<input
+class="search"
+id="search"
+placeholder="🔎 Kural kodu, punishment veya Türkçesini ara..."
+>
+
+<div class="filters">
+<button class="active" onclick="setLevel('all',this)">Tümü</button>
+<button onclick="setLevel('1',this)">🛡️ Admin 1</button>
+<button onclick="setLevel('2',this)">🛡️ Admin 2</button>
+<button onclick="setLevel('3',this)">👑 Admin 3</button>
+<button onclick="setType('Jail',this)">🔒 Jail</button>
+<button onclick="setType('Mute',this)">🔇 Mute</button>
+<button onclick="setType('Ban',this)">⛔ Ban</button>
+<button onclick="setType('Kick',this)">👢 Kick</button>
+<button onclick="setType('Devices Ban',this)">📱 Devices Ban</button>
+<button onclick="setType('Perma Ban',this)">💀 Perma</button>
+</div>
+
+<div id="content"></div>
+
+<div class="no-result" id="none">
+Aradığın kurala ait sonuç bulunamadı.
+</div>
+
+</div>
+
+<footer>
+ONE STATE TR · Yetkili Ceza Rehberi
+</footer>
+
+<script>
+
+const rules = [
+
+/* =========================
+   ADMIN 1
+========================= */
+
+{l:1,c:"Rp1",p:"Deathmatch",t:"Deathmatch (DM)",s:"Hapis 20 dk",e:"Sebep yazılmalı > Rp1"},
+{l:1,c:"Rp2",p:"DeathmatchAuto",t:"Deathmatch Auto (DM Auto)",s:"Hapis 20 dk",e:"Sebep yazılmalı"},
+{l:1,c:"Rp3",p:"NrpPower",t:"NRP Power",s:"Hapis 10 dk",e:""},
+{l:1,c:"Rp4",p:"CreatingNrpSituations",t:"NRP Durumları Oluşturmak",s:"Hapis 15 dk",e:""},
+{l:1,c:"Rp5",p:"Metagaming",t:"Metagaming (MG)",s:"Susturma 30 dk",e:"Her yerde susturma"},
+{l:1,c:"Rp6",p:"RoleplayRejection",t:"RP'den Kaçınma",s:"Hapis 30 dk",e:""},
+{l:1,c:"Rp7",p:"RoleplayDisbalance",t:"RP Dengesizliği",s:"Hapis 20 dk",e:""},
+{l:1,c:"Rp8",p:"AfkInGame",t:"AFK",s:"Oyun İçi Kick",e:""},
+{l:1,c:"Rp9",p:"DriveBy",t:"VDM",s:"Hapis 60 dk",e:""},
+{l:1,c:"RP10",p:"RepeatKill",t:"Tekrarlı Öldürme (RK)",s:"Hapis 90 dk",e:""},
+{l:1,c:"Rp11",p:"GreenZoneViolation",t:"Yeşil Alan İhlalleri",s:"Hapis 45 dk",e:""},
+{l:1,c:"Rp12",p:"NrpKidnapping",t:"Gerçek Dışı Kaçırma",s:"Hapis 30 dk",e:""},
+{l:1,c:"Rp15",p:"FactionMemberProvocation",t:"Birim Üyelerini Tahrik Etme",s:"Hapis 30 dk",e:""},
+{l:1,c:"Name1",p:"NrpNickname",t:"Gerçek Dışı (NRP) İsim",s:"Oyun İçi Kick",e:""},
+{l:1,c:"Name2",p:"OffensiveNickname",t:"Hakaret İçeren İsim",s:"Kick",e:""},
+{l:1,c:"Chat5",p:"SpamAndFlood",t:"Spam ve Art Arda Mesaj",s:"Susturma 10 dk",e:"Her yerde mesaj susturma"},
+{l:1,c:"Chat6",p:"ReportSystemAbuse",t:"Raporlama/Yardım Sistemi Suistimali",s:"Susturma 30 dk",e:"Her yerde mesaj susturma"},
+{l:1,c:"Chat8",p:"MusicInVoiceChat",t:"Sesli Sohbette Müzik",s:"Susturma 60 dk",e:"Mikrofon susturma"},
+{l:1,c:"Chat16",p:"UnofficialLanguageUsage",t:"Resmi Olmayan Dil Kullanımı",s:"Susturma 10 dk",e:"Her yerde mesaj susturma"},
+{l:1,c:"TChat1",p:"TradeChatAbuse",t:"Ticaret Kanalında Spam",s:"Susturma 20 dk",e:"Her yerde mesaj susturma"},
+{l:1,c:"Abuse5",p:"GameplayObstruction",t:"Oyun Akışını veya RP'yi Engelleme",s:"Hapis 60 dk",e:""},
+{l:1,c:"Clan1",p:"GangNameViolation",t:"Çete Adları, Açıklamaları ve Rütbeleri",s:"Kick",e:""},
+{l:1,c:"Clan2",p:"BlockingGangHouse",t:"Çete Giriş/Çıkış Alanlarını Engelleme",s:"Hapis 60 dk",e:""},
+{l:1,c:"Clan3",p:"GangChatViolotion",t:"Çete Sohbeti Kuralları",s:"Susturma 240 dk",e:"Her yerde mesaj susturma"},
+{l:1,c:"Clan4",p:"GangTeaming",t:"Etkinlikte Diğer Çetelerle İş Birliği",s:"Hapis 30 dk",e:""},
+{l:1,c:"Clan5",p:"GangTazerAbuse",t:"Çete Şok Tabancası Kullanımı",s:"Hapis 90 dk",e:""},
+{l:1,c:"Clan6",p:"GangRecruitmentGreenZone",t:"Yeşil Alanda Çete Üye Alımı",s:"Susturma 60 dk",e:"Her yerde mesaj susturma"},
+
+/* =========================
+   ADMIN 2
+========================= */
+
+{l:2,c:"Rp1",p:"Deathmatch",t:"Deathmatch (DM)",s:"Hapis 20 dk",e:"Sebep yazılmalı > Rp1"},
+{l:2,c:"Rp2",p:"DeathmatchAuto",t:"Deathmatch Auto (DM Auto)",s:"Hapis 20 dk",e:"Sebep yazılmalı"},
+{l:2,c:"Rp3",p:"NrpPower",t:"NRP Power",s:"Hapis 10 dk",e:""},
+{l:2,c:"Rp4",p:"CreatingNrpSituations",t:"NRP Durumları Oluşturmak",s:"Hapis 15 dk",e:""},
+{l:2,c:"Rp5",p:"Metagaming",t:"Metagaming (MG)",s:"Susturma 30 dk",e:"Her yerde susturma"},
+{l:2,c:"Rp6",p:"RoleplayRejection",t:"RP'den Kaçınma",s:"Hapis 30 dk",e:""},
+{l:2,c:"Rp7",p:"RoleplayDisbalance",t:"RP Dengesizliği",s:"Hapis 20 dk",e:""},
+{l:2,c:"Rp8",p:"AfkInGame",t:"AFK",s:"Oyun İçi Kick",e:""},
+{l:2,c:"Rp9",p:"DriveBy",t:"VDM",s:"Hapis 60 dk",e:""},
+{l:2,c:"Rp9.1",p:"MassDriveBy",t:"Mass VDM (Toplu VDM)",s:"Ban 12 saat",e:"Sadece hesap banı"},
+{l:2,c:"RP10",p:"RepeatKill",t:"Tekrarlı Öldürme (RK)",s:"Hapis 90 dk",e:""},
+{l:2,c:"Rp11",p:"GreenZoneViolation",t:"Yeşil Alan İhlalleri",s:"Hapis 45 dk",e:""},
+{l:2,c:"Rp12",p:"NrpKidnapping",t:"Gerçek Dışı Kaçırma",s:"Hapis 30 dk",e:""},
+{l:2,c:"Rp13",p:"NrpFactionActions",t:"Gerçek Dışı Birim Eylemleri",s:"Ban 3 Gün",e:""},
+{l:2,c:"Rp14",p:"SexualHarassment",t:"Cinsel Taciz",s:"Ban 30 Gün",e:""},
+{l:2,c:"Rp15",p:"FactionMemberProvocation",t:"Birim Üyelerini Tahrik Etme",s:"Hapis 30 dk",e:""},
+{l:2,c:"Rp16",p:"CrimesAgainstEmergencyPersonnel",t:"Acil Sağlık Personeline Karşı Suç",s:"Ban 12 saat",e:"Hesap"},
+{l:2,c:"Name1",p:"NrpNickname",t:"Gerçek Dışı (NRP) İsim",s:"Oyun İçi Kick",e:""},
+{l:2,c:"Name2",p:"OffensiveNickname",t:"Hakaret İçeren İsim",s:"Kick",e:""},
+{l:2,c:"Ac2",p:"TransferringAccount",t:"Hesap Aktarımı",s:"Perma Ban",e:"Hesap banı, cihaz banı yok"},
+{l:2,c:"Chat1",p:"InsultingPlayer",t:"Oyuncuya Hakaret",s:"Ban 24 saat",e:""},
+{l:2,c:"Chat2",p:"InsultingRelatives",t:"Oyuncunun Yakınlarına Hakaret",s:"Ban 3 Gün",e:""},
+{l:2,c:"Chat3",p:"DiscriminationInsults",t:"Ayrımcı / Aşağılayıcı İfadeler",s:"Ban 3 Gün",e:""},
+{l:2,c:"Chat4",p:"InsultingAdministration",t:"Yönetime Hakaret",s:"Ban 7 Gün",e:""},
+{l:2,c:"Chat5",p:"SpamAndFlood",t:"Spam ve Art Arda Mesaj",s:"Susturma 10 dk",e:"Her yerde mesaj susturma"},
+{l:2,c:"Chat6",p:"ReportSystemAbuse",t:"Raporlama/Yardım Sistemi Suistimali",s:"Susturma 30 dk",e:"Her yerde mesaj susturma"},
+{l:2,c:"Chat7",p:"UnauthorizedAdvertising",t:"İzinsiz Tanıtım",s:"Ban 10 Gün",e:""},
+{l:2,c:"Chat8",p:"MusicInVoiceChat",t:"Sesli Sohbette Müzik",s:"Susturma 60 dk",e:"Mikrofon susturma"},
+{l:2,c:"Chat13",p:"RealLifeThreats",t:"Gerçek Hayata Yönelik Tehdit",s:"Ban 10 Gün",e:""},
+{l:2,c:"Chat14",p:"ProvokingRuleViolations",t:"Kurallara Aykırı Davranışlar",s:"Ban 12 saat",e:""},
+{l:2,c:"Chat15",p:"ToxicBehavior",t:"Toksik Davranış",s:"Ban 3 Gün",e:""},
+{l:2,c:"Chat16",p:"UnofficialLanguageUsage",t:"Resmi Olmayan Dil Kullanımı",s:"Susturma 10 dk",e:"Her yerde mesaj susturma"},
+{l:2,c:"TChat1",p:"TradeChatAbuse",t:"Ticaret Kanalında Spam",s:"Susturma 20 dk",e:"Her yerde mesaj susturma"},
+{l:2,c:"Abuse1",p:"GameModeAbuse",t:"Oyun Modu Suistimali",s:"Ban 30 Gün",e:"Hesap"},
+{l:2,c:"Abuse2",p:"AfkAbuse",t:"AFK Suistimali",s:"Ban 3 Gün",e:"Hesap"},
+{l:2,c:"Abuse3",p:"SystematicRuleViolation",t:"Sistematik Kural İhlali",s:"Ban 30 Gün",e:"Hesap"},
+{l:2,c:"Abuse4",p:"LargeScaleRpInterruption",t:"Büyük Ölçekli RP'yi Kesintiye Uğratmak",s:"Ban 24 saat",e:"Hesap"},
+{l:2,c:"Abuse5",p:"GameplayObstruction",t:"Oyun Akışını veya RP'yi Engelleme",s:"Hapis 60 dk",e:""},
+{l:2,c:"Alert4",p:"EconomyDamage",t:"Sunucu İçi Ekonomiyi Zarara Uğratma",s:"Perma Ban",e:"Hesap"},
+{l:2,c:"Media1",p:"Mediastalking",t:"Israrlı Takip (İçerik Üreticisi)",s:"Ban 12 saat",e:"Ban 12 saat 30 dk"},
+{l:2,c:"Clan1",p:"GangNameViolation",t:"Çete Adları, Açıklamaları ve Rütbeleri",s:"Kick",e:""},
+{l:2,c:"Clan2",p:"BlockingGangHouse",t:"Çete Giriş/Çıkış Alanlarını Engelleme",s:"Hapis 60 dk",e:""},
+{l:2,c:"Clan3",p:"GangChatViolotion",t:"Çete Sohbeti Kuralları",s:"Susturma 240 dk",e:"Sadece her yerde mesaj susturma"},
+{l:2,c:"Clan4",p:"GangTeaming",t:"Etkinlikte Diğer Çetelerle İş Birliği",s:"Hapis 30 dk",e:""},
+{l:2,c:"Clan5",p:"GangTazerAbuse",t:"Çete Şok Tabancası Kullanımı",s:"Hapis 90 dk",e:""},
+{l:2,c:"Clan6",p:"GangRecruitmentGreenZone",t:"Yeşil Alanda Çete Üye Alımı",s:"Susturma 60 dk",e:"Sadece her yerde mesaj susturma"},
+{l:2,c:"Clan10",p:"GangCurrencyAbuse",t:"Çete Paralarının Kötüye Kullanımı",s:"30 Gün",e:"Hesap"},
+
+/* =========================
+   ADMIN 3
+========================= */
+
+{l:3,c:"Rp1",p:"Deathmatch",t:"Deathmatch (DM)",s:"Hapis 20 dk",e:"Sebep girilmesi zorunlu"},
+{l:3,c:"Rp2",p:"DeathmatchAuto",t:"Deathmatch Auto (DM Auto)",s:"Hapis 20 dk",e:"Sebep girilmesi zorunlu"},
+{l:3,c:"Rp3",p:"NrpPower",t:"NRP Power",s:"Hapis 10 dk",e:""},
+{l:3,c:"Rp4",p:"CreatingNrpSituations",t:"NRP Durumları Oluşturmak",s:"Hapis 15 dk",e:""},
+{l:3,c:"Rp5",p:"Metagaming",t:"Metagaming (MG)",s:"Susturma 30 dk",e:"Tüm kanallarda susturma"},
+{l:3,c:"Rp6",p:"RoleplayRejection",t:"RP'den Kaçınma",s:"Hapis 30 dk",e:""},
+{l:3,c:"Rp7",p:"RoleplayDisbalance",t:"RP Dengesizliği",s:"Hapis 20 dk",e:""},
+{l:3,c:"Rp8",p:"AfkInGame",t:"AFK",s:"Oyun İçi Kick",e:""},
+{l:3,c:"Rp9",p:"DriveBy",t:"VDM",s:"Hapis 60 dk",e:""},
+{l:3,c:"Rp9.1",p:"MassDriveBy",t:"Mass VDM (Toplu VDM)",s:"Ban 12 saat",e:"Sadece hesap banı"},
+{l:3,c:"RP10",p:"RepeatKill",t:"Tekrarlı Öldürme (RK)",s:"Hapis 90 dk",e:""},
+{l:3,c:"Rp11",p:"GreenZoneViolation",t:"Yeşil Alan İhlalleri",s:"Hapis 45 dk",e:""},
+{l:3,c:"Rp12",p:"NrpKidnapping",t:"Gerçek Dışı Kaçırma",s:"Hapis 30 dk",e:""},
+{l:3,c:"Rp13",p:"NrpFactionActions",t:"Gerçek Dışı Birim Eylemleri",s:"Ban 3 Gün",e:"Sadece hesap"},
+{l:3,c:"Rp14",p:"SexualHarassment",t:"Cinsel Taciz",s:"Ban 30 Gün",e:"Sadece hesap"},
+{l:3,c:"Rp15",p:"FactionMemberProvocation",t:"Birim Üyelerini Tahrik Etme",s:"Hapis 30 dk",e:""},
+{l:3,c:"Rp16",p:"CrimesAgainstEmergencyPersonnel",t:"Acil Sağlık Personeline Karşı Suç",s:"Ban 12 saat",e:"Hesap"},
+{l:3,c:"Name1",p:"NrpNickname",t:"Gerçek Dışı (NRP) İsim",s:"Oyun İçi Kick",e:""},
+{l:3,c:"Name2",p:"OffensiveNickname",t:"Hakaret İçeren İsim",s:"Kick",e:""},
+{l:3,c:"Ac1",p:"SellingAccount",t:"Hesap Satışı",s:"Cihaz Ban",e:"Cihaz ban, hesap açık, 999999 (Perma)"},
+{l:3,c:"Ac2",p:"TransferringAccount",t:"Hesap Aktarımı",s:"Perma Ban",e:"Hesap banı, cihaz banı yok, 999999 (Perma)"},
+{l:3,c:"Ac3",p:"CreatingTooManyAccount",t:"3 ve Üstü Hesap Oluşturma",s:"Cihaz Ban",e:"Cihaz ban, hesap açık, 999999 (Perma)"},
+{l:3,c:"Ac4",p:"AccountHacking",t:"Hesap Ele Geçirme",s:"Cihaz Ban",e:"Cihaz ban, hesap açık, 999999 (Perma)"},
+{l:3,c:"Ac5",p:"RealWorldTrading",t:"Gerçek Hayat Takası",s:"Cihaz Ban",e:"Cihaz ban, hesap açık, 999999 (Perma)"},
+{l:3,c:"Chat1",p:"InsultingPlayer",t:"Oyuncuya Hakaret",s:"Ban 24 saat",e:"Hesap"},
+{l:3,c:"Chat2",p:"InsultingRelatives",t:"Oyuncunun Yakınlarına Hakaret",s:"Ban 3 Gün",e:"Hesap"},
+{l:3,c:"Chat3",p:"DiscriminationInsults",t:"Ayrımcı / Aşağılayıcı İfadeler",s:"Ban 3 Gün",e:"Hesap"},
+{l:3,c:"Chat4",p:"InsultingAdministration",t:"Yönetime Hakaret",s:"Ban 7 Gün",e:"Hesap"},
+{l:3,c:"Chat5",p:"SpamAndFlood",t:"Spam ve Art Arda Mesaj",s:"Susturma 10 dk",e:"Her yerde mesaj susturma"},
+{l:3,c:"Chat6",p:"ReportSystemAbuse",t:"Raporlama/Yardım Sistemi Suistimali",s:"Susturma 30 dk",e:"Her yerde mesaj susturma"},
+{l:3,c:"Chat7",p:"UnauthorizedAdvertising",t:"İzinsiz Tanıtım",s:"Ban 10 Gün",e:"Hesap"},
+{l:3,c:"Chat8",p:"MusicInVoiceChat",t:"Sesli Sohbette Müzik",s:"Susturma 60 dk",e:"Mikrofon susturma"},
+{l:3,c:"Chat9",p:"ImpersonatingStaff",t:"Yönetim veya Şirket Personeli Gibi Davranma",s:"Cihaz Ban",e:"Cihaz ban, hesap açık, 999999 (Perma)"},
+{l:3,c:"Chat10",p:"DeceivingPlayers",t:"Oyuncuları Aldatma",s:"Cihaz Ban",e:"Cihaz ban, hesap açık, 999999 (Perma)"},
+{l:3,c:"Chat11",p:"DeceivingAdministration",t:"Yönetimi Aldatma",s:"Cihaz Ban",e:"Cihaz ban, hesap açık, 999999 (Perma)"},
+{l:3,c:"Chat12",p:"Defamation",t:"Karalama",s:"Ban 1 Gün",e:"Cihaz ban, 1 gün"},
+{l:3,c:"Chat13",p:"RealLifeThreats",t:"Gerçek Hayata Yönelik Tehdit",s:"Ban 10 Gün",e:"Hesap"},
+{l:3,c:"Chat14",p:"ProvokingRuleViolations",t:"Kurallara Aykırı Davranışlar",s:"Ban 12 saat",e:"Hesap"},
+{l:3,c:"Chat15",p:"ToxicBehavior",t:"Toksik Davranış",s:"Ban 3 Gün",e:"Hesap"},
+{l:3,c:"Chat16",p:"UnofficialLanguageUsage",t:"Resmi Olmayan Dil Kullanımı",s:"Susturma 10 dk",e:"Her yerde mesaj susturma"},
+{l:3,c:"Chat17",p:"PersonalInfoDisclosure",t:"Kişisel Bilgilerin İfşası",s:"Cihaz Ban",e:"Cihaz ban, hesap açık"},
+{l:3,c:"TChat1",p:"TradeChatAbuse",t:"Ticaret Kanalında Spam",s:"Susturma 20 dk",e:"Her yerde mesaj susturma"},
+{l:3,c:"Abuse1",p:"GameModeAbuse",t:"Oyun Modu Suistimali",s:"Ban 30 Gün",e:"Hesap"},
+{l:3,c:"Abuse2",p:"AfkAbuse",t:"AFK Suistimali",s:"Ban 3 Gün",e:"Hesap"},
+{l:3,c:"Abuse3",p:"SystematicRuleViolation",t:"Sistematik Kural İhlali",s:"Ban 30 Gün",e:"Hesap"},
+{l:3,c:"Abuse4",p:"LargeScaleRpInterruption",t:"Büyük Ölçekli RP'yi Kesintiye Uğratmak",s:"Ban 24 saat",e:"Hesap"},
+{l:3,c:"Abuse5",p:"GameplayObstruction",t:"Oyun Akışını veya RP'yi Engelleme",s:"Hapis 60 dk",e:""},
+{l:3,c:"Alert1",p:"BanBypass",t:"Yasaklama Cezasını Aşmaya Çalışma",s:"Cihaz Ban",e:"Cihaz ban, hesap açık, Süre: Ban 14 gün"},
+{l:3,c:"Alert2",p:"ServerDamage",t:"Sunuculara Yönelik Zarar Girişimi",s:"Cihaz Ban",e:"Cihaz ban, hesap açık, 999999 (Perma)"},
+{l:3,c:"Alert3",p:"UsingCheats",t:"Üçüncü Taraf Yazılım (Hile)",s:"Cihaz Ban",e:"Cihaz ban, hesap açık"},
+{l:3,c:"Alert4",p:"EconomyDamage",t:"Sunucu İçi Ekonomiyi Zarara Uğratma",s:"Perma Ban",e:"Hesap, Kademeli ban – aşağıdaki nota bakın"},
+{l:3,c:"Alert5",p:"ExternalDefamation",t:"Harici Platformlarda Karalama",s:"Cihaz Ban",e:"Cihaz ban, 999999 (Perma)"},
+{l:3,c:"Alert6",p:"ThirdPartyPromotion",t:"Üçüncü Taraf Projelerin Tanıtımı",s:"Cihaz Ban",e:"Cihaz ban, 14 gün"},
+{l:3,c:"Media1",p:"Mediastalking",t:"Israrlı Takip (İçerik Üreticisi)",s:"Ban 1 Gün",e:"1 günlük hesap banı"},
+{l:3,c:"Clan1",p:"GangNameViolation",t:"Çete Adları, Açıklamaları ve Rütbeleri",s:"Kick",e:""},
+{l:3,c:"Clan2",p:"BlockingGangHouse",t:"Çete Giriş/Çıkış Alanlarını Engelleme",s:"Hapis 60 dk",e:""},
+{l:3,c:"Clan3",p:"GangChatViolotion",t:"Çete Sohbeti Kuralları",s:"Susturma 240 dk",e:"Her yerde mesaj susturma"},
+{l:3,c:"Clan4",p:"GangTeaming",t:"Etkinlikte Diğer Çetelerle İş Birliği",s:"Hapis 30 dk",e:""},
+{l:3,c:"Clan5",p:"GangTazerAbuse",t:"Çete Şok Tabancası Kullanımı",s:"Hapis 90 dk",e:""},
+{l:3,c:"Clan6",p:"GangRecruitmentGreenZone",t:"Yeşil Alanda Çete Üye Alımı",s:"Susturma 60 dk",e:"Her yerde mesaj susturma"},
+{l:3,c:"Clan10",p:"GangCurrencyAbuse",t:"Çete Paralarının Kötüye Kullanımı",s:"30 Gün",e:"Hesap"}
+
+];
+
+let level="all";
+let type="all";
+
+document.getElementById("total").textContent=rules.length;
+
+function getType(s){
+if(s.includes("Susturma")) return "Mute";
+if(s.includes("Hapis")) return "Jail";
+if(s.includes("Cihaz Ban")) return "Devices Ban";
+if(s.includes("Perma")) return "Perma Ban";
+if(s.includes("Ban")) return "Ban";
+if(s.includes("Kick")) return "Kick";
+return "Other";
+}
+
+function render(){
+
+const q=document.getElementById("search").value.toLowerCase().trim();
+
+const filtered=rules.filter(r=>{
+
+const text=(
+r.c+" "+
+r.p+" "+
+r.t+" "+
+r.s+" "+
+r.e
+).toLowerCase();
+
+const searchOK=!q||text.includes(q);
+const levelOK=level==="all"||String(r.l)===level;
+const typeOK=type==="all"||getType(r.s)===type;
+
+return searchOK&&levelOK&&typeOK;
+
+});
+
+const content=document.getElementById("content");
+content.innerHTML="";
+
+[1,2,3].forEach(lvl=>{
+
+const list=filtered.filter(r=>r.l===lvl);
+
+if(level!=="all"&&String(lvl)!==level)return;
+if(!list.length)return;
+
+const section=document.createElement("div");
+section.className="section";
+
+section.innerHTML=`
+<div class="section-title">
+${lvl===3?"👑":"🛡️"} Admin ${lvl}
+<span class="badge">${list.length} Kural</span>
+</div>
+<div class="rules"></div>
+`;
+
+const grid=section.querySelector(".rules");
+
+list.forEach(r=>{
+
+const card=document.createElement("div");
+card.className="rule";
+
+card.innerHTML=`
+<div class="rule-top">
+<div class="code">${r.c}</div>
+<div class="type">${getType(r.s)}</div>
+</div>
+
+<div class="name">${r.p}</div>
+<div 
